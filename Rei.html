@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Mascota Virtual</title>
+  <link rel="stylesheet" href="../Rei-Chiki/rei.css">
+</head>
+<body>
+
+  <h1>¡Cuida a tu Rei Chikita!</h1>
+
+  <!-- Sección de la mascota -->
+  <div class="mascota" id="mascota">
+    <span id="mascotaEstado"><img src="./img/st_small_507x507-pad_600x600_f8f8f8-removebg-preview.png" alt=""></span>
+  </div>
+
+
+  <div class="status" id="estado">Feliz</div>
+  <div class="requirements" id="requisitos">Para ser muy feliz, necesita más energía, menos hambre y menos sed.</div>
+
+  <!-- Descripción de las barras -->
+  <div class="bar-description">Energía: Cuánto está descansada tu Rei Chikita.</div>
+  <div class="bar-container">
+    <div id="energiaBar" class="bar energia" style="width: 100%;"></div>
+  </div>
+
+  <div class="bar-description">Hambre: Cuánto hambre tiene tu Rei Chikita.</div>
+  <div class="bar-container">
+    <div id="hambreBar" class="bar hambre" style="width: 100%;"></div>
+  </div>
+
+  <div class="bar-description">Sed: Cuánta sed tiene tu Rei Chikita.</div>
+  <div class="bar-container">
+    <div id="sedBar" class="bar sed" style="width: 100%;"></div>
+  </div>
+
+  <div class="bar-description">Sueño: Cuánto necesita dormir tu Rei Chikita.</div>
+  <div class="bar-container">
+    <div id="sueñoBar" class="bar sueño" style="width: 100%;"></div>
+  </div>
+
+<!-- Botón para alimentar -->
+<button class="btn" onclick="mostrarComida()">Alimentar</button>
+
+<!-- Cuadro emergente con opciones de comida -->
+<div id="foodContainer" style="display: none;">
+  <div class="food-selection-box">
+    <h3>¿Qué quieres darle de comer?</h3>
+    <div class="food-item" onclick="alimentar('hamburguesa')">
+      <img src="img\ffMesa-de-trabajo-8-8-removebg-preview.png" alt="Hamburguesa">
+      <button>Hamburguesa</button>
+      <p>Restaura un 30% de hambre.</p>
+    </div>
+    <div class="food-item" onclick="alimentar('manzana')">
+      <img src="img\31400_G-removebg-preview.png" alt="Manzana">
+      <button>Manzana</button>
+      <p>Restaura un 20% de hambre.</p>
+    </div>
+    <div class="food-item" onclick="alimentar('comida_balanceada')">
+      <img src="img\Alimentacion-balanceada-imagen-destacada-removebg-preview.png" alt="Comida Balanceada">
+      <button>Comida Balanceada</button>
+      <p>Restaura un 40% de hambre.</p>
+    </div>
+    <div class="food-item" onclick="alimentar('pizza')">
+      <img src="img\una-pizza-con-queso-derretido--Pizza-blog-removebg-preview.png" alt="Pizza">
+      <button>Pizza</button>
+      <p>Restaura un 35% de hambre.</p>
+    </div>
+    <div class="food-item" onclick="alimentar('ensalada')">
+      <img src="img\4405_1-removebg-preview (1).png" alt="Ensalada">
+      <button>Ensalada</button>
+      <p>Restaura un 25% de hambre.</p>
+    </div>
+    <div class="food-item" onclick="alimentar('pastel')">
+      <img src="img\d39946abfdb8966ff90b895d02fb77cd1f8119d1-removebg-preview.png" alt="Pastel">
+      <button>Pastel</button>
+      <p>Restaura un 50% de hambre.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Botón para dar bebidas -->
+<button class="btn" onclick="mostrarBebidas()">Dar Bebida</button>
+
+<!-- Cuadro emergente con opciones de bebidas -->
+<div id="drinkContainer" style="display: none;">
+  <div class="food-selection-box">
+    <h3>¿Qué bebida quieres darle?</h3>
+    <div class="food-item" onclick="darBebida('jugo')">
+      <img src="img\XNOLHORWZRGU7GRHNKJMITULMI-removebg-preview.png" alt="Jugo">
+      <button>Jugo</button>
+      <p>Restaura un 25% de sed.</p>
+    </div>
+    <div class="food-item" onclick="darBebida('te')">
+      <img src="img\images-removebg-preview.png" alt="Té">
+      <button>Té</button>
+      <p>Restaura un 20% de sed.</p>
+    </div>
+    <!-- Bebida adicional: Refresco -->
+    <div class="food-item" onclick="darBebida('refresco')">
+      <img src="img\refrescos-portada-1653207586-removebg-preview (1).png" alt="Refresco">
+      <button>Refresco</button>
+      <p>Restaura un 35% de sed.</p>
+    </div>
+    <!-- Bebida adicional: Smoothie -->
+    <div class="food-item" onclick="darBebida('smoothie')">
+      <img src="img\cofee-removebg-preview.png" alt="Smoothie">
+      <button>Cafe</button>
+      <p>Restaura un 45% de sed.</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+  <button class="btn" onclick="hacerReir()">Hacer Reír</button>
+  <button class="btn" onclick="dormir()">Dormir</button>
+  <!-- Nuevo botón de "Modo Armario" -->
+  <button class="btn" onclick="toggleModoArmario()">Modo Armario</button>
+<div id="modoArmarioStatus">Modo Armario: Desactivado</div>
+
+<!-- Cuadro emergente con opciones de imágenes del modo armario -->
+<div id="armarioContainer" style="display: none;">
+  <div class="food-selection-box">
+    <h3>Selecciona unas fachas para tu Rei Chikita</h3>
+
+<!-- Opciones de imagen numeradas -->
+<div class="food-item" onclick="cambiarImagenArmario('modo1')">
+  <img src="img/PIG2Gvn-removebg-preview.png" alt="Modo 1">
+  <button>Rei Drip Supreme</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo2')">
+  <img src="img/sym1lm1pkmo31-removebg-preview.png" alt="Modo 2">
+  <button>Rei De Tamaulipas</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo3')">
+  <img src="img/descargar.jpg" alt="Modo 3">
+  <button>!NO PORQUE HAY COVID¡</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo4')">
+  <img src="img/descargar (1).jpg" alt="Modo 4">
+  <button>Rei Minecraft</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo5')">
+  <img src="img/Rei Chiquita.jpg" alt="Modo 5">
+  <button>Rei Gamer</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo6')">
+  <img src="img/_Arre__rei_chikita_en_pochita-removebg-preview.png" alt="Modo 6">
+  <button>Rei Con Pochis</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo7')">
+  <img src="img/Rei_chiquita_xd-removebg-preview.png" alt="Modo 7">
+  <button>Rei Asadora</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo8')">
+  <img src="img/94e67590-9b2c-487f-818b-541bd569c78f.jpg" alt="Modo 8">
+  <button>Rei Anime</button>
+</div>
+
+<div class="food-item" onclick="cambiarImagenArmario('modo9')">
+  <img src="img/Rei chikita subrealista.jpg" alt="Modo 9">
+  <button>Rei Renacentista</button>
+</div>
+
+
+<script src="../Rei-Chiki/rei.js"></script>
+  
+
+</body>
+</html>
